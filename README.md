@@ -8,6 +8,10 @@ Materials list
 2. MQ135 -> Quality of air -> 12.000
 3. YL100 -> Moisture sensor -> 5.000
 
-Test version
+To-Do list
 
-Yeah bitch, science!
+1. Setting up ESP32 offical firmware
+2. Setting up Eclipse IDE
+3. Setting up Eclipse IDE to work with ESP32 
+
+
