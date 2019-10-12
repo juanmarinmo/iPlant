@@ -1,0 +1,12 @@
+******* Submitting modifications *******
+
+git add .
+git commit -m "*** Whatever ***"
+
+git push origin juan_test 
+Sign in and voulá :)
+
+
+****************************************
+
+
