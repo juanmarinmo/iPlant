@@ -14,4 +14,4 @@ To-Do list
 2. Install Eclipse IDE
 3. Set up Eclipse IDE to work with ESP32 
 
-This is the test version --> Juan
+
