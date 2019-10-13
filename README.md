@@ -10,8 +10,8 @@ Materials list
 
 To-Do list
 
-1. Setting up ESP32 offical firmware
-2. Setting up Eclipse IDE
-3. Setting up Eclipse IDE to work with ESP32 
+1. Set up ESP32 offical firmware
+2. Install Eclipse IDE
+3. Set up Eclipse IDE to work with ESP32 
 
 
