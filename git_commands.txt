@@ -10,10 +10,16 @@ Sign in and voulá :)
 ******* Copying to master ********
 
 git checkout master
-git checkout juan_test (or another branch)
+git checkout juan_test (or another branch).
 
 git add --all
 git commit -m "copy of ****"
 
 git push 
 
+
+******* Switching users *********
+
+git checkout (desired branch)
+
+*********************************
