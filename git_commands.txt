@@ -17,4 +17,8 @@ git commit -m "copy of ****"
 
 git push 
 
+******** Switching users ************
 
+git checkout (branch you want to use)
+
+*************************************
