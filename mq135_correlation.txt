@@ -1,0 +1,13 @@
+pin = 0; %Definir pin
+
+v = getVoltage(pin);
+
+RL = 20000;
+Rs = 1024*RL/v - RL;
+Ro = 41763;  %Puede cambiar, sin embargo funciona para 4 de cada 5 sensorres
+
+ppm = 116.6020682(Rs/Ro)^-2.769034857; %Cantidad de CO2 
+
+
+
+
