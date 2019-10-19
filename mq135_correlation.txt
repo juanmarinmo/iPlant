@@ -1,12 +1,24 @@
-pin = 0; %Definir pin
+pin = 0; %Set up a pin
 
 v = getVoltage(pin);
 
 RL = 20000;
-Rs = 1024*RL/v - RL;
-Ro = 41763;  %Puede cambiar, sin embargo funciona para 4 de cada 5 sensorres
+Rs = RL*(5 - v)/v
 
-ppm = 116.6020682(Rs/Ro)^-2.769034857; %Cantidad de CO2 
+
+****** TEST ********
+
+Rs_prom = 500635.797126 
+
+ppm_CO2_prom = 415ppm
+
+--> Ro = 776500
+
+ppm = 115.1*(Rs/Ro)^-2.924; %CO2 in ppm
+
+%We got this formula based on the datasheet curves
+
+
 
 
 
