@@ -1,0 +1,11 @@
+So as to connect the mq135 sensor to ESP32 a voltage divider is required.
+
+
+R1 = 33k
+R2 = 17k
+
+
+					33k (5.0 V)
+				    ------------------ = 3.3 V
+					17k  +  33k
+
