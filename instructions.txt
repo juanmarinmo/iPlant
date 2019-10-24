@@ -1,0 +1,8 @@
+Una vez adentro de la carpeta esp32_test abrir consola y escribir:
+
+
+1. sudo chmod 666 /dev/ttyUSB0
+
+2. make 
+
+3. make flash 
