@@ -1,11 +1,46 @@
-So as to connect the mq135 sensor to ESP32 a voltage divider is required.
+***** ARDUINO *****
+
+MQ135
+
+ ___________
+|           |  
+|	    ----- VCC to 5V	
+|	    ----- GND to GND
+|	    ----- DO /
+|	    ----- AO to A0
+|___________|
+
+DHT22
+
+ ___________
+|           |  
+|	    ----- VCC to 5V	
+|	    ----- DATA to DIGITAL 2
+|	    ----- GND to GND
+|___________|
+
+***** ESP32 *****
+
+YL100 (HUMIDITY)
+
+ ___________
+|           |  
+|	    ----- VCC to 3.3V	
+|	    ----- GND to GND
+|	    ----- DO /
+|	    ----- AO to GPIO36 (VP)
+|___________|
+
+ARDUINO
+
+RX to TX2 (DO NOT FORGET TO USE LEVEL SHIFTER)
+TX TO RX2 (DO NOT FORGET TO USE LEVEL SHIFTER)
+
+FPGA
+
+GPIO 5 to (DEFINE FPGA PIN)
+GND to GND
 
 
-R1 = 33k
-R2 = 17k
 
-
-					33k (5.0 V)
-				    ------------------ = 3.3 V
-					17k  +  33k
-
+ 
