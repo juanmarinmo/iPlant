@@ -34,7 +34,7 @@ void Temperature( void *pvParameters );
 void setup () {
 
   //Inicialization
-  Serial.begin(9600);
+  Serial.begin(115200);
   dht.begin();
 
   //Just in case of an error
@@ -57,7 +57,7 @@ void setup () {
     ,  (const portCHAR *)"Humidity"   // A name just for humans
     ,  128  // This stack size can be checked & adjusted by reading the Stack Highwater
     ,  NULL
-    ,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,  3  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
     ,  NULL );
 
     xTaskCreate(
@@ -65,7 +65,7 @@ void setup () {
     ,  (const portCHAR *)"Temperature"   // A name just for humans
     ,  128  // This stack size can be checked & adjusted by reading the Stack Highwater
     ,  NULL
-    ,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+    ,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
     ,  NULL );
 
 }
@@ -94,14 +94,14 @@ void CO2(void *pvParameters)  // MQ135 analog reading
 
 
 
-void Humidity(void *pvParameters)  // YL100 analog reading
+void Humidity(void *pvParameters)  // Does nothing
 {
   (void) pvParameters;
 
   float u2 = 5.0 - 5.0*analogRead(A1)/1023; //Obtaining the voltage input sent by the sensor
   float hum = (u2/5.0)*100; //Parametrization 
 
-  Serial.println(hum);
+  //Serial.println(hum);
   vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 }
@@ -114,6 +114,8 @@ void Temperature(void *pvParameters)  // DHT11 digital reading
   //built-in function
   float t = dht.readTemperature();
   Serial.println(t);
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
+  delay(2000);
 
 }
+
+

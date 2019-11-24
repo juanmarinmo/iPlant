@@ -1,120 +1,114 @@
 #include <Arduino.h>
-#include <Adafruit_Sensor.h>
-#include <DHT.h>
-#include <Arduino_FreeRTOS.h>
-#include <task.h>
-#include <queue.h>
-#include <semphr.h> 
+#include <HardwareSerial.h>
+#include <Wire.h>
+#include <string.h>
 
 
-//******************************************** iPLANT MEASUREMENT SLAVE ************************************************
-// BOARD USED: ARDUINO UNO
-// MASTER: ESP-32
-// A CODE MADE BY JUAN MANUEL MARIN AND MILLER CUBILLOS
+HardwareSerial MySerial(1);
 
-//VARIABLES: CO2, SOIL MOISTURE, TEMPERATURE
-//SENSORS: MQ135, YL100, DHT11
+const int HPIN = 36;
+
+QueueHandle_t queue; //Se declara la cola
 
 
-//Temperature sensor
-DHT dht(2, DHT11); //Defining DHT11 
+void receiver( void *pvParameters ); //tarea 1
+void fpgasender( void *pvParameters );   //tarea 2
+void senderwifi( void *pvParameters ); //tarea 3
 
 
-//CO2 sensor parameters
-float RL = 20000; //According MQ135 datasheet
-float Ro = 2993000; //Characterized value
 
 
-//Tasks to be created
-void CO2( void *pvParameters );
-void Humidity( void *pvParameters );
-void Temperature( void *pvParameters );
-
-
-void setup () {
-
-  //Inicialization
+void setup() {
+ 
   Serial.begin(115200);
-  dht.begin();
+  MySerial.begin(115200, SERIAL_8N1, 16, 17);
 
-  //Just in case of an error
+  pinMode (5, OUTPUT);
+
+  //En caso de error
   while (!Serial){
     ;
   }
+	
+   queue = xQueueCreate(4, sizeof( float ) );
+   
+
+    if(queue == NULL){
+    Serial.println("Error creating the queue"); //En caso de error en la cola
+  }
+
+
+  //Creador de tareas
+
+    xTaskCreate(&receiver, "receiver", 1024, NULL, 2, NULL);
+    xTaskCreate(&fpgasender, "fpgasender", 1024, NULL, 2, NULL);
+    xTaskCreate(&senderwifi, "senderwifi", 1024, NULL, 2, NULL);
+    
+}
+
+void loop(){
   
-  //Task creator
-
-    xTaskCreate(
-    CO2
-    ,  (const portCHAR *)"CO2"   // A name just for humans
-    ,  128  // This stack size can be checked & adjusted by reading the Stack Highwater
-    ,  NULL
-    ,  2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-    ,  NULL );
-
-    xTaskCreate(
-    Humidity
-    ,  (const portCHAR *)"Humidity"   // A name just for humans
-    ,  128  // This stack size can be checked & adjusted by reading the Stack Highwater
-    ,  NULL
-    ,  3  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-    ,  NULL );
-
-    xTaskCreate(
-    Temperature
-    ,  (const portCHAR *)"Temperature"   // A name just for humans
-    ,  128  // This stack size can be checked & adjusted by reading the Stack Highwater
-    ,  NULL
-    ,  1  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
-    ,  NULL );
-
 }
 
-void loop()
-{
-  // Empty. Things are done in Tasks.
-}
-
-
-void CO2(void *pvParameters)  // MQ135 analog reading
+void receiver(void *pvParameters) //Recibe datos por UART
 {
   (void) pvParameters;
 
-  float v1 = 5.0 * analogRead(A0) / 1023; //Obtaining the voltage input sent by the sensor
-  float Rs = RL * (5.0 - v1) / v1; //Obtaining the sensor resistance
-  float ratio = Rs/Ro; 
+  for(;;){
+   
+    if(MySerial.available()){
+    
+    //String data = MySerial.readStringUntil(' ');
+    float data = MySerial.parseFloat();    
+    
+    //Serial.println(data);
+
+    xQueueSend(queue, &data, portMAX_DELAY);
+
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+    }else{
+      Serial.println("error");
+    }
+  }
+}
+	 
+
+void fpgasender(void *pvParameters)  // YL100 analog reading
+{
+  (void) pvParameters;
   
-  float ppm = 115.1 * pow(ratio,-2.924); //Voltage into PPM transformation
+  for(;;){
+  float u2 = 3.3-(3.3*analogRead(HPIN)/4095) ; //Obtaining the voltage input sent by the sensor
+  float hum = (u2/3.3)*100; //Parametrization 
+ 
+  if(hum<10){ 
+  
+   digitalWrite(5, HIGH);
+   
+  }if(hum>10){
+   
+   digitalWrite(5, LOW);
+    
+  }  
 
-  Serial.println(ppm);
-
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
-
+  xQueueSend(queue, &hum, portMAX_DELAY);
+  vTaskDelay(2000/portTICK_PERIOD_MS);
+  }
 }
 
-
-
-void Humidity(void *pvParameters)  // Does nothing
+void senderwifi(void *pvParameters) //Por el momento solo recopila datos
 {
   (void) pvParameters;
 
-  float u2 = 5.0 - 5.0*analogRead(A1)/1023; //Obtaining the voltage input sent by the sensor
-  float hum = (u2/5.0)*100; //Parametrization 
-
-  //Serial.println(hum);
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
-
-}
-
-
-void Temperature(void *pvParameters)  // DHT11 digital reading
-{
-  (void) pvParameters;
-
-  //built-in function
-  float t = dht.readTemperature();
-  Serial.println(t);
-  delay(2000);
+ for(;;){
+     float Rx;
+    
+      
+     xQueueReceive(queue,&Rx, 1000/portTICK_RATE_MS);
+     Serial.println(Rx);
+    vTaskDelay(500/portTICK_PERIOD_MS);
+  }
 
 }
 
