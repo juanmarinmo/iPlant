@@ -2,9 +2,6 @@
 #include <HardwareSerial.h>
 #include <Wire.h>
 #include <string.h>
-#include <ArduinoHttpClient.h>
-#include <WiFi.h>
-#include <sstream>
 
 
 HardwareSerial MySerial(1);
@@ -19,26 +16,13 @@ void fpgasender( void *pvParameters );   //tarea 2
 void senderwifi( void *pvParameters ); //tarea 3
 
 
-//Conectandose a la red
 
-char* ssid = " "; //Definir nombre WIFI
-char* password = " "; //Definir Clave
-
-char serverAddress[] = "192.168.0.3";  // Dirección IP de Raspberry PI
-int port = 8080; //Definir puerto
-
-
-WiFiClient wifi;
-HttpClient client = HttpClient(wifi, serverAddress, port);
-int status = WL_IDLE_STATUS;
 
 void setup() {
  
   Serial.begin(115200);
   MySerial.begin(115200, SERIAL_8N1, 16, 17);
-  WiFi.begin(ssid, password); //Inicia WiFi
-  
-  //Salida FPGA
+
   pinMode (5, OUTPUT);
 
   //En caso de error
@@ -119,22 +103,14 @@ void senderwifi(void *pvParameters) //Por el momento solo recopila datos
 
  for(;;){
      float Rx;
-     String floatRX = (String)Rx;
+    
       
      xQueueReceive(queue,&Rx, 1000/portTICK_RATE_MS);
-
-    String contentType = "text/plain";
-    
-    client.post("/", "text/plain", floatRX);
-
-    client.stop();
-
-     vTaskDelay(500/portTICK_PERIOD_MS);
-
-
-        
+     Serial.println(Rx);
+    vTaskDelay(500/portTICK_PERIOD_MS);
   }
-  
+
 }
+
 
 
