@@ -109,13 +109,13 @@ void senderwifi( void * parameter)
    
    if(httpResponseCode>0 && httpR2 >0){
  
-    Serial.println(""); 
+    Serial.println(dataP);
+    Serial.println(dataH); 
  
     }
    if(httpResponseCode<0 && httpR2<0){
   
-    Serial.println(dataP);
-    Serial.println(dataH);
+    Serial.println("POST error");
  
    }
  
