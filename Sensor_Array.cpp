@@ -88,7 +88,7 @@ void CO2(void *pvParameters)  // MQ135 analog reading
 
   Serial.println(ppm);
 
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
+  vTaskDelay(20000 / portTICK_PERIOD_MS);
 
 }
 
@@ -102,19 +102,19 @@ void Humidity(void *pvParameters)  // Does nothing
   float hum = (u2/5.0)*100; //Parametrization 
 
   //Serial.println(hum);
-  vTaskDelay(2000 / portTICK_PERIOD_MS);
+  vTaskDelay(20000 / portTICK_PERIOD_MS);
 
 }
 
 
-void Temperature(void *pvParameters)  // DHT11 digital reading
+void Temperature(void *pvParameters)  // Does nothing
 {
   (void) pvParameters;
 
   //built-in function
   float t = dht.readTemperature();
-  Serial.println(t);
-  delay(2000);
+  //Serial.println(t);
+  delay(20000);
 
 }
 
