@@ -2,21 +2,28 @@
 #include <WiFi.h>
 #include <HTTPClient.h> 
 #include <HardwareSerial.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
 
 HardwareSerial MySerial(1);
 
 const int HPIN = 36;
+#define DHTPIN 27  
 
 //QueueHandle_t queue; //Se declara la cola
  
 const char* ssid = "FibraETB915E";            //ESP32 y Raspberry conectadas a la misma red
 const char* password = "FE36C3EF";
 
+DHT dht(DHTPIN, DHT11); //Defining DHT11
+
 void setup() {
  
   Serial.begin(115200);
+
   MySerial.begin(115200, SERIAL_8N1, 16, 17);
   pinMode (5, OUTPUT);
+ 
   delay(1000);
 
      //queue = xQueueCreate(4, sizeof( float ) );
@@ -84,13 +91,23 @@ void senderwifi( void * parameter)
 {
  
     for( ;; ){
+
+    dht.begin();
     
     float data = MySerial.parseFloat();    
     String dataP = (String)data;
+   
     float u2 = 3.3-(3.3*analogRead(HPIN)/4095) ; //Obtaining the voltage input sent by the sensor
     float hum = (u2/3.3)*100; //Parametrization
+  
     String dataH = (String)hum;
-    //Serial.println(dataP);
+
+    float t = dht.readTemperature();
+    String dataT = (String)t;
+    
+    Serial.println(dataT);
+    Serial.println(dataP);
+    Serial.println(dataH);
 
     
 
@@ -105,22 +122,26 @@ void senderwifi( void * parameter)
  
    int httpResponseCode = http.POST(dataP);   //Send the actual POST request
    int httpR2 = http.POST(dataH);
+   int httpR3 = http.POST(dataT);
+
+      
    
-   
-   if(httpResponseCode>0 && httpR2 >0){
+   if(httpResponseCode>0 && httpR2 >0 && httpR3>0){
  
-    Serial.println(dataP);
-    Serial.println(dataH); 
+    
+    Serial.println("Correct POST");
  
     }
-   if(httpResponseCode<0 && httpR2<0){
-  
-    Serial.println("POST error");
+   if(httpResponseCode<0 && httpR2<0 && httpR3<0){
+    
+    Serial.println("Error");
  
+   }else{
+    Serial.println("...");
    }
  
    http.end();  //Free resources
-   vTaskDelay(10000 / portTICK_PERIOD_MS);
+   vTaskDelay(1000 / portTICK_PERIOD_MS);
     
     }
     
