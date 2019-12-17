@@ -68,6 +68,7 @@ Core members:
 - [x] Write a HIGH output in one of the ESP32 GPIO pins connected to FPGA for a threshold humidity reading
 - [x] Design level shifter PCB layout
 
+
 **MQ135 calibration** 
 
 The sensor was connected to a 5V source for 24 hours, and afterwards CO2 readings were taken for 1 hour (1 second per reading) and registered in "mq135_log.txt".
@@ -81,11 +82,27 @@ The full procedure is available on "mq135_correlation.txt".
 
 **MQ135 readings**
 
-They were performed on Arduino UNO. Although the remaining sensors were planned to be read using this board as well, the MQ135 was the only one that truly demands a 5V board to properly work. The code is available on MQ135 folder.
+They were performed on Arduino UNO. Although the remaining sensors were planned to be read using this board as well, the MQ135 was the only one that truly demands a 5V board to properly work. The code is available in MQ135 folder. (PlatformIO IDE was used to make this code). 
+
 
 **Level shifter design**
 
 ![Level shifter circuit](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/circ_levsh-1.png)
+
+
+**MQTT broker and remaining readings using FreeRTOS**
+
+The main code which not only takes readings from sensors YL100 and DHT11 but sends the data collected to the database using a MQTT broker is available in the folder Master_MQTT. (Arduino IDE was used to make this code). 
+
+Additionally, the implementation of the activation of a HIGH state in one of the GPIO pins of the ESP32 was also performed on this file. 
+
+
+**Level Shifter PCB layout**
+
+![Level shifter PCB](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/level_shifter-1.png)
+
+
+
 
 
 
