@@ -58,15 +58,15 @@ Core members:
 
 ### Specific To-Do list
 
-[x] Set up workspaces (Arduino IDE and Platform IO)
-[x] Take measures from sensors YL100 and DHT11 using ESP32
-[x] Implement FreeRTOS in ESP32 
-[x] Calibrate MQ135 sensor 
-[x] Take measures from MQ135 sensor using Arduino UNO
-[x] Design level shifter circuit for serial communication (Arduino UNO - ESP32)
-[x] Implement MQTT broker in ESP32
-[x] Write a HIGH output in one of the ESP32 GPIO pins connected to FPGA for a threshold humidity reading
-[x] Design level shifter PCB layout
+- [x] Set up workspaces (Arduino IDE and Platform IO)
+- [x] Take measures from sensors YL100 and DHT11 using ESP32
+- [x] Implement FreeRTOS in ESP32 
+- [x] Calibrate MQ135 sensor 
+- [x] Take measures from MQ135 sensor using Arduino UNO
+- [x] Design level shifter circuit for serial communication (Arduino UNO - ESP32)
+- [x] Implement MQTT broker in ESP32
+- [x] Write a HIGH output in one of the ESP32 GPIO pins connected to FPGA for a threshold humidity reading
+- [x] Design level shifter PCB layout
 
 **MQ135 calibration** 
 
