@@ -40,6 +40,41 @@ Development of an IoT solution to keep track of the plants needs and to discover
 
 To check the connections between each module please read "wiring.txt".
 
+## Server and database
+
+Core members:
+
+- Juan Sebastián Monje
+- Wilmar Quiroga
+
+Still working...
+
+## Microcontroller 
+
+Core members: 
+
+- Miller Cubillos
+- Juan Manuel Marin 
+
+## FPGA 
+
+Core members:
+
+- Maria Fernanda Triviño
+- Gilbert Andrés Angulo
+
+Still working...
+
+## Mobile app
+
+Developer:
+
+- Juan Sebastián Quecán
+
+Still working...
+
+
+
 
 
 
