@@ -68,7 +68,7 @@ Core members:
 [x] Write a HIGH output in one of the ESP32 GPIO pins connected to FPGA for a threshold humidity reading
 [x] Design level shifter PCB layout
 
-** MQ135 calibration ** 
+**MQ135 calibration** 
 
 The sensor was connected to a 5V source for 24 hours, and afterwards CO2 readings were taken for 1 hour (1 second per reading) and registered in "mq135_log.txt".
 
