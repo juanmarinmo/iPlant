@@ -79,6 +79,17 @@ Once registered the readings, they were therefore averaged so as to continue wit
 The full procedure is available on "mq135_correlation.txt".
 
 
+**MQ135 readings**
+
+They were performed on Arduino UNO. Although the remaining sensors were planned to be read using this board as well, the MQ135 was the only one that truly demands a 5V board to properly work. The code is available on MQ135 folder.
+
+**Level shifter design**
+
+![Level shifter circuit](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/circ_levsh-1.png)
+
+
+
+
 ## FPGA 
 
 Core members:
