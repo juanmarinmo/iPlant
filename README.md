@@ -38,7 +38,7 @@ Development of an IoT solution to keep track of the plants needs and to discover
 
 ![iPlant map](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/map.jpg)
 
-To check the connections between each module please check "wiring.txt".
+To check the connections between each module please read "wiring.txt".
 
 
 
