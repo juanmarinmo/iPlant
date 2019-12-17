@@ -1,0 +1,25 @@
+pin = 0; %Set up a pin
+
+v = getVoltage(pin);
+
+RL = 20000;
+Rs = RL*(5 - v)/v
+
+
+****** TEST ********
+
+Rs_prom = 500635.797126 
+
+ppm_CO2_prom = 415ppm
+
+--> Ro = 776500
+
+ppm = 115.1*(Rs/Ro)^-2.924; %CO2 in ppm
+
+%We got this formula based on the datasheet curves
+
+
+
+
+
+
