@@ -1,13 +1,13 @@
 ![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/proyecto.png)
 
 
-# iPLANT
+# iPlant
 
 Development of an IoT solution to keep track of the plants needs and to discover their contribution in the improvement of air quality in one's home.
 
 ## Required Materials
 
-1. ESP32 Programmable board (Microprocessor/Master)
+1. ESP32 Programmable board (Microcontroller/Master)
 2. Raspberry PI (Server)
 3. FPGA (Slave)
 4. Sensor array
@@ -16,6 +16,25 @@ Development of an IoT solution to keep track of the plants needs and to discover
 	- MQ135 (CO2)
 5. Arduino UNO (Slave)
 6. Level shifter circuit (ESP32 - Arduino UNO serial connection)
+
+## General To-Do list
+
+- [x] Study the problem
+- [x] Propose different solutions 
+- [x] Evaluate alternatives
+- [x] Select the most viable one
+- [x] Run DOFA analysis
+- [x] Determine each iPlant core member's strengths
+- [x] According to the results of the previous task, assign each member a task.
+
+## iPlant implementation main branches
+
+- Server and database
+- Microcontroller 
+- FPGA 
+- Mobile app 
+
+
 
 
 
