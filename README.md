@@ -1,17 +1,22 @@
-#iPlant
+# iPLANT
 
-Development of a measurement module which sends the data colleceted to a database
+![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/Tleaf.png)
 
-Materials list
 
-1. ESP32 -> IoT programmable board -> 34.000
-2. MQ135 -> Quality of air -> 12.000
-3. YL100 -> Moisture sensor -> 5.000
+Development of an IoT solution to keep track of the plants needs and to discover their contribution in the improvement of air quality in one's home.
 
-To-Do list
+## Materials required
 
-1. Set up ESP32 offical firmware
-2. Install Eclipse IDE
-3. Set up Eclipse IDE to work with ESP32 
+
+1. ESP32 Programmable board (Microprocessor/Master)
+2. Raspberry PI (Server)
+3. FPGA (Slave)
+4. Sensor array
+	- DHT11 (Temperature)
+	- YL100 (Humidity)
+	- MQ135 (CO2)
+5. Arduino UNO (Slave)
+6. Level shifter circuit (ESP32 - Arduino UNO serial connection)
+
 
 
