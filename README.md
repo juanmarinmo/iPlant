@@ -1,4 +1,4 @@
-![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/Tleaf.png)
+![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/proyecto.png)
 
 
 # iPLANT
