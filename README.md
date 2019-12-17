@@ -5,7 +5,7 @@
 
 Development of an IoT solution to keep track of the plants needs and to discover their contribution in the improvement of air quality in one's home.
 
-## Required Materials
+## Required materials
 
 1. ESP32 Programmable board (Microcontroller/Master)
 2. Raspberry PI (Server)
@@ -17,7 +17,7 @@ Development of an IoT solution to keep track of the plants needs and to discover
 5. Arduino UNO (Slave)
 6. Level shifter circuit (ESP32 - Arduino UNO serial connection)
 
-## General To-Do list
+## Main To-Do list
 
 - [x] Study the problem
 - [x] Propose different solutions 
@@ -33,6 +33,11 @@ Development of an IoT solution to keep track of the plants needs and to discover
 - Microcontroller 
 - FPGA 
 - Mobile app 
+
+## General map
+
+![iPlant map](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/map.jpg)
+
 
 
 
