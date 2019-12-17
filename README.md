@@ -1,11 +1,11 @@
-![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/proyecto.png)
+![iPlant logo](https://raw.githubusercontent.com/juanmarinmo/iPlant/master/assets/proyecto.jpg)
 
 
 # iPLANT
 
 Development of an IoT solution to keep track of the plants needs and to discover their contribution in the improvement of air quality in one's home.
 
-## Materials required
+## Required Materials
 
 1. ESP32 Programmable board (Microprocessor/Master)
 2. Raspberry PI (Server)
